@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.DataTransferObjects;
+﻿using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CompanyEmployees
 {
@@ -33,10 +33,10 @@ namespace CompanyEmployees
             var response = context.HttpContext.Response;
             var buffer = new StringBuilder();
             if (context.Object is IEnumerable<CompanyDto>)
-                foreach (var company in (IEnumerable<CompanyDto>) context.Object)
+                foreach (var company in (IEnumerable<CompanyDto>)context.Object)
                     FormatCsv(buffer, company);
             else
-                FormatCsv(buffer, (CompanyDto) context.Object);
+                FormatCsv(buffer, (CompanyDto)context.Object);
             await response.WriteAsync(buffer.ToString());
         }
 

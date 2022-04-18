@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Contracts;
+﻿using Contracts;
 using Entities;
+using System.Threading.Tasks;
 
 namespace Repository
 {

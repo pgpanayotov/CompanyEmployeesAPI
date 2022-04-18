@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CompanyEmployees.ModelBinders
 {
@@ -29,7 +29,7 @@ namespace CompanyEmployees.ModelBinders
             var genericType =
                 bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
             var converter = TypeDescriptor.GetConverter(genericType);
-            var objectArray = providedValue.Split(new[] {","},
+            var objectArray = providedValue.Split(new[] { "," },
                     StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => converter.ConvertFromString(x.Trim()))
                 .ToArray();
