@@ -23,6 +23,7 @@ namespace Repository
                 .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
                 .Search(employeeParameters.SearchTerm)
                 .OrderBy(e => e.Name)
+                .Sort(employeeParameters.OrderBy)
                 .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
                 .Take(employeeParameters.PageSize)
                 .ToListAsync();
