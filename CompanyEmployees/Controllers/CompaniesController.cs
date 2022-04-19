@@ -4,6 +4,7 @@ using CompanyEmployees.ModelBinders;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace CompanyEmployees.Controllers
     // [ApiVersion("1.0")] - Controller is versioned using Conventions
     [Route("api/companies")]
     [ApiController]
+    [ResponseCache(CacheProfileName = "120SecondsDuration")]
     public class CompaniesController : ControllerBase
     {
         private readonly ILoggerManager _logger;
@@ -36,6 +38,8 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet(Name = "GetCompanies")]
+        [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)]
+        [HttpCacheValidation(MustRevalidate = false)]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await _repository.Company.GetAllCompaniesAsync(false);
@@ -45,6 +49,8 @@ namespace CompanyEmployees.Controllers
 
         [HttpGet("{id}", Name = "CompanyById")]
         [ServiceFilter(typeof(ValidateCompanyExistsAttribute))]
+        [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)]
+        [HttpCacheValidation(MustRevalidate = false)]
         public IActionResult GetCompany(Guid id)
         {
             var company = HttpContext.Items["company"] as Company;
