@@ -42,6 +42,7 @@ namespace CompanyEmployees
             services.AddScoped<ValidateMediaTypeAttribute>();
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
             services.AddScoped<EmployeeLinks>();
+            services.ConfigureVersioning();
 
             services.AddControllers(config =>
                 {
@@ -51,7 +52,6 @@ namespace CompanyEmployees
                 .AddXmlDataContractSerializerFormatters()
                 .AddCustomCSVFormatter();
             services.AddCustomMediaTypes();
-
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
         }
 

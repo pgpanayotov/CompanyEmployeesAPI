@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.Controllers
 {
+    // [ApiVersion("1.0")] - Controller is versioned using Conventions
     [Route("api/companies/{companyId}/employees")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -32,6 +33,7 @@ namespace CompanyEmployees.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
             [FromQuery] EmployeeParameters employeeParameters)

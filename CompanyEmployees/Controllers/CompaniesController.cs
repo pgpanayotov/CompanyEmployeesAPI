@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.Controllers
 {
+    // [ApiVersion("1.0")] - Controller is versioned using Conventions
     [Route("api/companies")]
     [ApiController]
     public class CompaniesController : ControllerBase
@@ -34,7 +35,7 @@ namespace CompanyEmployees.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies")]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await _repository.Company.GetAllCompaniesAsync(false);
@@ -52,7 +53,7 @@ namespace CompanyEmployees.Controllers
             return Ok(companyDto);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateCompany")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
