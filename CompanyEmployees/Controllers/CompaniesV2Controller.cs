@@ -6,6 +6,7 @@ namespace CompanyEmployees.Controllers
 {
     // [ApiVersion("2.0", Deprecated = true)] - Controller is versioned using Conventions
     [Route("api/companies")]
+    [ApiExplorerSettings(GroupName = "v2")]
     [ApiController]
     public class CompaniesV2Controller : ControllerBase
     {

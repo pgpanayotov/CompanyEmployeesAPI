@@ -36,6 +36,7 @@ namespace CompanyEmployees
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.ConfigureVersioning();
+            services.ConfigureSwagger();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -102,6 +103,13 @@ namespace CompanyEmployees
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "CompanyEmployees v1");
+                s.SwaggerEndpoint("/swagger/v2/swagger.json", "CompanyEmployees v2");
+            });
         }
     }
 }
